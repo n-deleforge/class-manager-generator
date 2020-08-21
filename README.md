@@ -1,2 +1,2 @@
-# class-manager-generator
+# Class Manager Generator
 A tool to generate PHP files for class and manager.
