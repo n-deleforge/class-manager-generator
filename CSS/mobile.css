@@ -1,0 +1,14 @@
+@media(max-width: 1200px) {
+    #container {
+        padding: 2vh 5vw;
+    }
+
+    header {
+        padding: 1.5vh;
+    }
+
+    button  {
+        min-width: 60vw;
+        max-width: 60vw;
+    }
+}

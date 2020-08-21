@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>ClassManager Generator</title>
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/mobile.css">
+    <link rel="icon" href="ressources/favicon.ico" rel="icon" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf8">
+</head>
+
+<body>
+    <div id="content">
+        <header>
+            <span id="title">Class Manager Generator</span>
+            <span id="lang">EN</span>
+        </header>
+
+        <div id="container">
+            <label id="tableNameLabel" for="tableName"></label>
+            <p id="tableNameDesc"></p>
+            <input id="tableName" class="gen">
+
+            <label id="tableIdLabel" for="tableId"></label>
+            <p id="tableIdDesc"></p>
+            <input id="tableId" class="gen">
+
+            <label id="columnsNameLabel" for="columnsName"></label>
+            <p id="columnsNameDesc"></p>
+            <textarea id="columnsName" class="gen" rows="5"></textarea>
+
+            <label id="classNameLabel" for="className"></label>
+            <p id="classNameDesc"></p>
+            <input id="className" class="gen">
+
+            <p id="error"></p>
+            <button id="generate"></button>
+        </div>
+    </div>
+
+    <script src="JS/littleJS.js"></script>
+    <script src="JS/init.js"></script>
+    <script src="JS/class.js"></script>
+    <script src="JS/manager.js"></script>
+    <script src="JS/main.js"></script>
+</body>
+
+</html>
