@@ -1,7 +1,7 @@
 # Class & manager generator
 
 > Version 1.2 :memo:  
-> An easy tool to generate PHP files for class and manager
+> An easy tool to generate PHP files for class and manager.
 
 ## How to use it ?
 
