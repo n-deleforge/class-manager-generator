@@ -230,3 +230,9 @@ function download(c, n) {
     dl.href = window.URL.createObjectURL(file);
     dl.click();
 }
+
+// ==========================> Add a majuscule
+// ========================================
+function ucFirst(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
