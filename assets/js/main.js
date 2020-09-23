@@ -7,8 +7,8 @@ let tableId;
 let className;
 let columnsName;
 let language;
-let linkGitHub = "<a href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
-let linkHome = "<a href=\"https://nicolas-deleforge.fr/\">nd</a>";
+let linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
+let linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
 let version = "1.2";
 
 const FR = {
