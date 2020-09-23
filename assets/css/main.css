@@ -30,7 +30,7 @@ p {
     flex-direction: column;
     flex-grow: 1;
     margin: 2vh 25vw;
-    border-top : 2px solid white;
+    border-top: 2px solid white;
     border-bottom: 2px solid white;
 }
 
