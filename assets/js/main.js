@@ -7,12 +7,12 @@ let tableId;
 let className;
 let columnsName;
 let language;
-let linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
-let linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
-let version = "1.2";
+
+const linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
+const linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
+const version = "1.3";
 
 const FR = {
-    'lang' : "FR",
     'generate' : "Générer",
     'error' : "Tous les champs sont nécessaires.",
     'footer' : "Disponible sur " + linkGitHub + " (v " + version + ") - Hébergé sur " + linkHome,
@@ -27,7 +27,6 @@ const FR = {
 }
 
 const EN = {
-    'lang' : "EN",
     'generate' : "Generate",
     'error' : "All the fields have to be filled.",
     'footer' : "Available on " + linkGitHub + " (v " + version + ") - Hosted on " + linkHome,
@@ -41,7 +40,8 @@ const EN = {
     'classNameDesc' : "Name of the Class and the Manager."
 }
 
-if (storage("get", 'ND_GeneratorApp-Language') == "FR") language = FR;
+
+if (navigator.language == "fr") language = FR;
 else language = EN;
 display();
 
@@ -52,25 +52,11 @@ display();
 // =======================> Display the app text
 // ========================================
 function display() {
+    get("#htmlTag").lang = navigator.language;
     let idName = Object.keys(language);
     let values = Object.values(language);
     for (let i = 0; i < idName.length; i++) get("#" + idName[i]).innerHTML = values[i];
 }
-
-// =====================> Manage the lang button
-// ========================================
-get('#lang').addEventListener("click", function () {
-    if (get('#lang').innerHTML == "FR") {
-        storage("set", 'ND_GeneratorApp-Language', "EN")
-        language = EN;
-    } 
-    else {
-        storage("set", 'ND_GeneratorApp-Language', "FR")
-        language = FR;
-    }
-
-    display();
-})
 
 // =================> Manage the generate button
 // ========================================
