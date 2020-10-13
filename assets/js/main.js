@@ -6,7 +6,7 @@ let tableName;
 let tableId;
 let className;
 let columnsName;
-let language;
+let display;
 
 const linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
 const linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
@@ -40,23 +40,21 @@ const EN = {
     'classNameDesc' : "Name of the Class and the Manager."
 }
 
-
-if (navigator.language == "fr") language = FR;
-else language = EN;
-display();
-
 // =================================================
 // ============================================ MAIN
 // =================================================
 
-// =======================> Display the app text
+// ====================> Display the app content
 // ========================================
-function display() {
-    get("#htmlTag").lang = navigator.language;
-    let idName = Object.keys(language);
-    let values = Object.values(language);
-    for (let i = 0; i < idName.length; i++) get("#" + idName[i]).innerHTML = values[i];
-}
+let language = navigator.language;
+get("#htmlTag").lang = language;
+
+if (language == "fr") display = FR;
+else display = EN;
+
+let idName = Object.keys(display);
+let values = Object.values(display);
+for (let i = 0; i < idName.length; i++) get("#" + idName[i]).innerHTML = values[i];
 
 // =================> Manage the generate button
 // ========================================
