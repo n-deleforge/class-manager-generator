@@ -2,15 +2,17 @@
 // ==================================== INITIALISATION
 // =================================================
 
+const version = 1.3; // the actual version of the app
 const linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
 const linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
-const version = "1.3";
 
+// ===> Some variables which will contain all the data of the form
 let tableName;
 let tableId;
 let className;
 let columnsName;
 
+// ===> French translation
 const FR = {
     'generate' : "Générer",
     'error' : "Tous les champs sont nécessaires.",
@@ -25,6 +27,7 @@ const FR = {
     'classNameDesc' : "Nom de la Class et du Manager que vous allez créer (une majuscule est automatiquement appliquée)."
 }
 
+// ===> English translation
 const EN = {
     'generate' : "Generate",
     'error' : "All the fields have to be filled.",
@@ -39,6 +42,7 @@ const EN = {
     'classNameDesc' : "Name of the Class and the Manager."
 }
 
+// ===> Will determine the language of the app
 if (navigator.language == "fr") {
     display = FR;
     get("#htmlTag").lang = "fr";
@@ -48,6 +52,7 @@ else {
     get("#htmlTag").lang = "en";
 }
 
+// ===> Automatically fill all ID fields
 let idName = Object.keys(display);
 let values = Object.values(display);
 for (let i = 0; i < idName.length; i++) get("#" + idName[i]).innerHTML = values[i];
