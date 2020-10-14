@@ -15,6 +15,11 @@ p {
     padding: 1vh;
 }
 
+button:active,
+button:focus {
+    outline: 0
+}
+
 /* ================================================= */
 /* ======================= CONTAINERS */
 

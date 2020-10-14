@@ -2,15 +2,14 @@
 // ==================================== INITIALISATION
 // =================================================
 
+const linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
+const linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
+const version = "1.3";
+
 let tableName;
 let tableId;
 let className;
 let columnsName;
-let display;
-
-const linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
-const linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
-const version = "1.3";
 
 const FR = {
     'generate' : "Générer",
@@ -40,21 +39,22 @@ const EN = {
     'classNameDesc' : "Name of the Class and the Manager."
 }
 
-// =================================================
-// ============================================ MAIN
-// =================================================
-
-// ====================> Display the app content
-// ========================================
-let language = navigator.language;
-get("#htmlTag").lang = language;
-
-if (language == "fr") display = FR;
-else display = EN;
+if (navigator.language == "fr") {
+    display = FR;
+    get("#htmlTag").lang = "fr";
+}
+else {
+    display = EN;
+    get("#htmlTag").lang = "en";
+}
 
 let idName = Object.keys(display);
 let values = Object.values(display);
 for (let i = 0; i < idName.length; i++) get("#" + idName[i]).innerHTML = values[i];
+
+// =================================================
+// ============================================ MAIN
+// =================================================
 
 // =================> Manage the generate button
 // ========================================
