@@ -43,7 +43,7 @@ const EN = {
 }
 
 // ===> Will determine the language of the app
-if (navigator.language == "fr") {
+if (navigator.language == "fr" || navigator.language == "fr-FR") {
     display = FR;
     get("#htmlTag").lang = "fr";
 }
