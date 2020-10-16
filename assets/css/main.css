@@ -37,6 +37,7 @@ button:focus {
     flex-direction: column;
     flex-grow: 1;
     margin: 2vh 25vw;
+    padding: 2vh 0;
     border-top: 2px solid white;
     border-bottom: 2px solid white;
 }
