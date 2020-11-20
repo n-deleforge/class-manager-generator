@@ -199,7 +199,7 @@ function generateFindById() {
 
 // ===> Create the getList function
 function generateGetList() {
-    return "public static function getList()\n{\n$db = DbConnect::getDb();\n$langage = [];\n" + '$q = $db->query("SELECT * FROM ' + tableName + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$langage[] = new " + className + "($donnees);\n}\n}\nreturn $langage;\n}";
+    return "public static function getList()\n{\n$db = DbConnect::getDb();\n$tab = [];\n" + '$q = $db->query("SELECT * FROM ' + tableName + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$tab[] = new " + className + "($donnees);\n}\n}\nreturn $tab;\n}";
 }
 
 // =================================================
