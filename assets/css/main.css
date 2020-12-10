@@ -108,10 +108,10 @@ button:hover {
 }
 
 #error {
-    display: none;
     font-size: 1.1em;
     text-align: center;
     color :lightcoral;
+    visibility: hidden;
 }
 
 /* ======================================== */
