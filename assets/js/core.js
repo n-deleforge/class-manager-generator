@@ -1,17 +1,21 @@
-// ===> General variables
-const version = 1.4;
-const linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
-const linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
-let tableName;
-let tableId;
-let className;
-let columnsName;
+// =================================================
+// =================================================
+// ============ CORE VARIABLES
+
+const version = 1.5;
+const githubLink = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
+const homeLink = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
+let tableName; let tableId; let className; let columnsName;
+
+// =================================================
+// =================================================
+// ============ CORE INITIALISATION
 
 // ===> French translation
-const FR = {
+const french = {
     'generate' : "Générer",
     'error' : "Tous les champs sont nécessaires.",
-    'footer' : "Disponible sur " + linkGitHub + " (v " + version + ") - Hébergé sur " + linkHome,
+    'footer' : "Disponible sur " + githubLink + " (v " + version + ") - Hébergé sur " + homeLink,
     'tableNameLabel' : "➡ NOM DE LA TABLE",
     'tableNameDesc' : "Nom de table qui correspond au nom tel qu'il est dans votre base de données SQL.",
     'tableIdLabel' : "➡ NOM DU CHAMP ID",
@@ -23,10 +27,10 @@ const FR = {
 }
 
 // ===> English translation
-const EN = {
+const english = {
     'generate' : "Generate",
     'error' : "All the fields have to be filled.",
-    'footer' : "Available on " + linkGitHub + " (v " + version + ") - Hosted on " + linkHome,
+    'footer' : "Available on " + githubLink + " (v " + version + ") - Hosted on " + homeLink,
     'tableNameLabel' : "➡ TABLE NAME",
     'tableNameDesc' : "Name of the table in your database.",
     'tableIdLabel' : "➡ ID FIELD NAME",
@@ -39,18 +43,20 @@ const EN = {
 
 // ===> Determine the language of the app
 if (navigator.language == "fr" || navigator.language == "fr-FR") {
-    display = FR;
+    display = french;
     get("#htmlTag").lang = "fr";
 }
 else {
-    display = EN;
+    display = english;
     get("#htmlTag").lang = "en";
 }
 
 // ===> Automatically fill all ID fields
-let idName = Object.keys(display);
+let names = Object.keys(display);
 let values = Object.values(display);
 
-for (let i = 0; i < idName.length; i++) {
-    if (get("#" + idName[i])) get("#" + idName[i]).innerHTML = values[i];
+for (let i = 0; i < names.length; i++) {
+    if (get("#" + names[i])) {
+        get("#" + names[i]).innerHTML = values[i];
+    }
 }

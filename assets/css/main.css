@@ -2,13 +2,25 @@
 /* ======================================== */
 /* ======== MAIN */
 
+:root {
+    --background : #262931;
+    --mainTextColor : white; 
+    --borderContainer : white;
+    --footerLinkColor : lightcoral;
+    --labelTextColor : lightcoral;
+    --borderInput : black;
+    --errorTextColor : lightcoral;
+    --buttonColor1 : white;
+    --buttonColor2 : lightcoral;
+}
+
 html,
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #262931;
-    color: white;
+    background: var(--background);
+    color: var(--mainTextColor);
 }
 
 p {
@@ -23,7 +35,7 @@ button:focus {
 
 /* ======================================== */
 /* ======================================== */
-/* ======== CONTAINER */
+/* ======== GENERAL */
 
 #content {
     display: flex;
@@ -31,26 +43,23 @@ button:focus {
     min-height: 100vh;
 }
 
+header {
+    display: flex;
+    justify-content: center;
+    padding: 2vh;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
 #container {
     display: flex;
     justify-content: center;
     flex-direction: column;
     flex-grow: 1;
-    margin: 2vh 25vw;
+    margin: 0 25vw;
     padding: 2vh 0;
-    border-top: 2px solid white;
-    border-bottom: 2px solid white;
-}
-
-/* ======================================== */
-/* ======================================== */
-/* ======== HEADER + FOOTER */
-
-header {
-    display: flex;
-    justify-content: center;
-    padding: 2vh;
-    font-size: 1.5em;
+    border-top: 2px solid var(--borderContainer);
+    border-bottom: 2px solid var(--borderContainer);
 }
 
 #footer {
@@ -59,7 +68,7 @@ header {
 }
 
 #footer a {
-    color: lightcoral;
+    color: var(--footerLinkColor);
     text-decoration: none;
 }
 
@@ -73,14 +82,14 @@ header {
 
 label {
     text-transform: uppercase;
-    font-size: 1.1em;
-    color: lightcoral;
+    font-size: 1.5em;
+    color: var(--labelTextColor);
 }
 
 input,
 textarea {
-    padding: 1vh;
-    border: 1px solid black;
+    padding: 1.5vh;
+    border: 1px solid var(--borderInput);
     border-radius: 5px;
     margin-bottom: 2vh;
 }
@@ -89,10 +98,10 @@ textarea {
     resize: vertical;
 }
 
-button {
-    background: white;
-    color: black;
-    font-size: 1.3em;
+#generate {
+    background: var(--buttonColor1);
+    color: var(--buttonColor2);
+    font-size: 1.5em;
     padding: 1.5vh;
     border-radius: 10px;
     border: 0;
@@ -102,15 +111,16 @@ button {
     text-transform: uppercase;
 }
 
-button:hover {
-    background: lightcoral;
-    color: white;
+#generate:hover {
+    background: var(--buttonColor2);
+    color: var(--buttonColor1);
 }
 
 #error {
-    font-size: 1.1em;
+    font-size: 1.5em;      
+    padding-bottom: 2vh;      
     text-align: center;
-    color :lightcoral;
+    color :var(--errorTextColor);
     visibility: hidden;
 }
 
@@ -120,14 +130,19 @@ button:hover {
 
 @media(max-width: 1200px) {
     #container {
-        margin: 2vh 5vw;
+        margin: 0 5vw;
     }
 
     header {
         padding: 1.5vh;
+        font-size: 1.5em;
     }
 
-    button  {
+    label {
+        font-size: 1.2em;
+    }
+
+    #generate  {
         min-width: 60vw;
         max-width: 60vw;
     }

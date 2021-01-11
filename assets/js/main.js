@@ -4,8 +4,8 @@
 
 // ===> Manage the generate button
 get("#generate").addEventListener("click", function () {
-    let error = 0; // error count
-    let list = get(".gen"); // list of all inputs
+    let error = 0;
+    let list = get(".gen");
 
     for (let i = 0; i < list.length; i++) {
         // increment error if an input is empty
@@ -13,7 +13,7 @@ get("#generate").addEventListener("click", function () {
     }
 
     if (error == 0) {
-        get("#error").style.display = "none";
+        get("#error").style.visibility = "hidden";
 
         // Fulfill variables with correct data
         tableName = get("#tableName").value;
@@ -51,7 +51,7 @@ function generateAttributes() {
 // ===> Create the getter/setter part
 function generateGetterSetter() {
     let getterSetter = "";
-
+    
     for (let i = 0; i < columnsName.length; i++) {
         getterSetter += "public function get" + ucFirst(columnsName[i]) + "()\n" + "{\n" + " return $this->_" + columnsName[i] + ";\n}\n";
         getterSetter += "public function set" + ucFirst(columnsName[i]) + "($_" + columnsName[i] + ")\n" + "{\n" + " return $this->_" + columnsName[i] + " = $_" + columnsName[i] + ";\n}\n";
@@ -63,23 +63,23 @@ function generateGetterSetter() {
 // ===> Create the construct part
 function genererConstruct() {
     return `public function __construct(array $options = [])
+{
+    if (!empty($options))
     {
-        if (!empty($options))
+        $this->hydrate($options);
+    }
+}
+
+public function hydrate($data)
+{
+    foreach ($data as $key => $value) {
+        $methode = "set" . ucfirst($key);
+        if (is_callable(([$this, $methode])))
         {
-            $this->hydrate($options);
+            $this->$methode($value);
         }
     }
-
-    public function hydrate($data)
-    {
-        foreach ($data as $key => $value) {
-            $methode = "set" . ucfirst($key);
-            if (is_callable(([$this, $methode])))
-            {
-                $this->$methode($value);
-            }
-        }
-    }`;
+}`;
 }
 
 // =================================================
