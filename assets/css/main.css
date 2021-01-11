@@ -3,15 +3,15 @@
 /* ======== MAIN */
 
 :root {
-    --background : #262931;
-    --mainTextColor : white; 
-    --borderContainer : white;
-    --footerLinkColor : lightcoral;
-    --labelTextColor : lightcoral;
-    --borderInput : black;
-    --errorTextColor : lightcoral;
-    --buttonColor1 : white;
-    --buttonColor2 : lightcoral;
+    --background: #262931;
+    --mainTextColor: white;
+    --borderContainer: white;
+    --footerLinkColor: lightcoral;
+    --labelTextColor: lightcoral;
+    --borderInput: black;
+    --errorTextColor: lightcoral;
+    --buttonColor1: white;
+    --buttonColor2: lightcoral;
 }
 
 html,
@@ -19,18 +19,13 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: var(--background);
     color: var(--mainTextColor);
+    background: var(--background);
 }
 
 p {
     margin: 0;
     padding: 1vh;
-}
-
-button:active,
-button:focus {
-    outline: 0
 }
 
 /* ======================================== */
@@ -47,15 +42,15 @@ header {
     display: flex;
     justify-content: center;
     padding: 2vh;
-    font-size: 2.5em;
     text-transform: uppercase;
+    font-size: 2.5em;
 }
 
 #container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     flex-grow: 1;
+    justify-content: center;
     margin: 0 25vw;
     padding: 2vh 0;
     border-top: 2px solid var(--borderContainer);
@@ -63,13 +58,13 @@ header {
 }
 
 #footer {
-    text-align: center;
     padding: 2vh;
+    text-align: center;
 }
 
 #footer a {
-    color: var(--footerLinkColor);
     text-decoration: none;
+    color: var(--footerLinkColor);
 }
 
 #footer a:hover {
@@ -88,10 +83,10 @@ label {
 
 input,
 textarea {
+    margin-bottom: 2vh;
     padding: 1.5vh;
     border: 1px solid var(--borderInput);
     border-radius: 5px;
-    margin-bottom: 2vh;
 }
 
 textarea {
@@ -99,38 +94,43 @@ textarea {
 }
 
 #generate {
-    background: var(--buttonColor1);
-    color: var(--buttonColor2);
-    font-size: 1.5em;
-    padding: 1.5vh;
-    border-radius: 10px;
-    border: 0;
     margin: 0 auto;
-    min-width: 20vw;
+    padding: 1.5vh;
     max-width: 20vw;
+    min-width: 20vw;
+    border: 0;
+    border-radius: 10px;
     text-transform: uppercase;
+    font-size: 1.5em;
+    color: var(--buttonColor2);
+    background: var(--buttonColor1);
 }
 
 #generate:hover {
-    background: var(--buttonColor2);
     color: var(--buttonColor1);
+    background: var(--buttonColor2);
 }
 
 #error {
-    font-size: 1.5em;      
-    padding-bottom: 2vh;      
-    text-align: center;
-    color :var(--errorTextColor);
     visibility: hidden;
+    padding-bottom: 2vh;
+    text-align: center;
+    font-size: 1.5em;
+    color: var(--errorTextColor);
 }
 
 /* ======================================== */
 /* ======================================== */
 /* ======== MOBILE */
 
-@media(max-width: 1200px) {
+@media(max-width:1200px) {
     #container {
         margin: 0 5vw;
+    }
+
+    button:active,
+    button:focus {
+        outline: 0;
     }
 
     header {
@@ -142,8 +142,8 @@ textarea {
         font-size: 1.2em;
     }
 
-    #generate  {
-        min-width: 60vw;
+    #generate {
         max-width: 60vw;
+        min-width: 60vw;
     }
 }
