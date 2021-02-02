@@ -1,6 +1,6 @@
 /* ======================================== */
 /* ======================================== */
-/* ======== MAIN */
+/* ======== VARIABLES */
 
 :root {
     --background: #262931;
@@ -14,6 +14,10 @@
     --buttonColor2: lightcoral;
 }
 
+/* ======================================== */
+/* ======================================== */
+/* ======== MAIN */
+
 html,
 body {
     margin: 0;
@@ -23,16 +27,7 @@ body {
     background: var(--background);
 }
 
-p {
-    margin: 0;
-    padding: 1vh;
-}
-
-/* ======================================== */
-/* ======================================== */
-/* ======== GENERAL */
-
-#content {
+#container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -46,7 +41,30 @@ header {
     font-size: 2.5em;
 }
 
-#container {
+#footer {
+    padding: 2vh;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: var(--footerLinkColor);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    margin: 0;
+    padding: 1vh;
+}
+
+/* ======================================== */
+/* ======================================== */
+/* ======== APP */
+
+#app {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -56,24 +74,6 @@ header {
     border-top: 2px solid var(--borderContainer);
     border-bottom: 2px solid var(--borderContainer);
 }
-
-#footer {
-    padding: 2vh;
-    text-align: center;
-}
-
-#footer a {
-    text-decoration: none;
-    color: var(--footerLinkColor);
-}
-
-#footer a:hover {
-    text-decoration: underline;
-}
-
-/* ======================================== */
-/* ======================================== */
-/* ======== FORM */
 
 label {
     text-transform: uppercase;
@@ -124,7 +124,7 @@ textarea {
 /* ======== MOBILE */
 
 @media(max-width:1200px) {
-    #container {
+    #app {
         margin: 0 5vw;
     }
 

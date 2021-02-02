@@ -3,12 +3,11 @@
 // ============ MAIN
 
 // ===> Manage the generate button
-get("#generate").addEventListener("click", function () {
+get("#generate").addEventListener("click", () => {
     let error = 0;
     let list = get(".gen");
 
     for (let i = 0; i < list.length; i++) {
-        // increment error if an input is empty
         if (list[i].value === "") error++; 
     }
 
@@ -16,14 +15,14 @@ get("#generate").addEventListener("click", function () {
         get("#error").style.visibility = "hidden";
 
         // Fulfill variables with correct data
-        tableName = get("#tableName").value;
-        tableId = get("#tableId").value;
-        className = ucFirst(get("#className").value);
-        columnsName = get("#columnsName").value.split(',');
+        TABLE_NAME = get("#tableName").value;
+        TABLE_ID = get("#tableId").value;
+        CLASS_NAME = ucFirst(get("#className").value);
+        COLUMNS_NAME = get("#columnsName").value.split(',');
 
         // Generate data and make it downloadable
-        download(generateClass(), className + ".Class.php");
-        download(generateManager(), className + "Manager.Class.php");
+        download(generateClass(), CLASS_NAME + ".Class.php");
+        download(generateManager(), CLASS_NAME + "Manager.Class.php");
     }
     else get("#error").style.visibility = "visible";
 });
@@ -34,15 +33,15 @@ get("#generate").addEventListener("click", function () {
 
 // ===> Merge together all the class functions
 function generateClass() {
-    return "<?php" + "\n" + 'class ' + className + "\n{\n" + generateAttributes() + "\n" + generateGetterSetter() + "\n" + genererConstruct() + "\n\n}";
+    return "<?php" + "\n" + 'class ' + CLASS_NAME + "\n{\n" + generateAttributes() + "\n" + generateGetterSetter() + "\n" + genererConstruct() + "\n\n}";
 }
 
 // ===> Create the attributes part
 function generateAttributes() {
     let attributes = "";
 
-    for (let i = 0; i < columnsName.length; i++) {
-        attributes += "private $_" + columnsName[i] + ";\n";
+    for (let i = 0; i < COLUMNS_NAME.length; i++) {
+        attributes += "private $_" + COLUMNS_NAME[i] + ";\n";
     }
 
     return attributes;
@@ -52,9 +51,9 @@ function generateAttributes() {
 function generateGetterSetter() {
     let getterSetter = "";
     
-    for (let i = 0; i < columnsName.length; i++) {
-        getterSetter += "public function get" + ucFirst(columnsName[i]) + "()\n" + "{\n" + " return $this->_" + columnsName[i] + ";\n}\n";
-        getterSetter += "public function set" + ucFirst(columnsName[i]) + "($_" + columnsName[i] + ")\n" + "{\n" + " return $this->_" + columnsName[i] + " = $_" + columnsName[i] + ";\n}\n";
+    for (let i = 0; i < COLUMNS_NAME.length; i++) {
+        getterSetter += "public function get" + ucFirst(COLUMNS_NAME[i]) + "()\n" + "{\n" + " return $this->_" + COLUMNS_NAME[i] + ";\n}\n";
+        getterSetter += "public function set" + ucFirst(COLUMNS_NAME[i]) + "($_" + COLUMNS_NAME[i] + ")\n" + "{\n" + " return $this->_" + COLUMNS_NAME[i] + " = $_" + COLUMNS_NAME[i] + ";\n}\n";
     }
 
     return getterSetter;
@@ -88,10 +87,10 @@ public function hydrate($data)
 
 // ===> Merge together all the manager functions
 function generateManager() {
-    let key = columnsName.find(element => element == tableId);
-    if (key != "undefined") columnsName.splice(columnsName.indexOf(key), 1)
+    let key = COLUMNS_NAME.find(element => element == TABLE_ID);
+    if (key != "undefined") COLUMNS_NAME.splice(COLUMNS_NAME.indexOf(key), 1)
 
-    return "<?php\nclass " + className + "Manager\n{\n" + generateAdd() + "\n\n" + generateUpdate() + "\n\n" + generateDelete() + "\n\n" + generateFindById() + "\n\n" + generateGetList() + "\n\n}";
+    return "<?php\nclass " + CLASS_NAME + "Manager\n{\n" + generateAdd() + "\n\n" + generateUpdate() + "\n\n" + generateDelete() + "\n\n" + generateFindById() + "\n\n" + generateGetList() + "\n\n}";
 }
 
 // ===> Create the add functiion
@@ -100,16 +99,16 @@ function generateAdd() {
     let sqlValues = "";
     let bindsList = "";
 
-    for (let i = 0; i < columnsName.length; i++) {
-        attributesList += columnsName[i] + ",";
-        sqlValues += ":" + columnsName[i] + ",";
-        bindsList += '$q->bindValue(":' + columnsName[i] + '", $obj->get' + ucFirst(columnsName[i]) + "());\n";
+    for (let i = 0; i < COLUMNS_NAME.length; i++) {
+        attributesList += COLUMNS_NAME[i] + ",";
+        sqlValues += ":" + COLUMNS_NAME[i] + ",";
+        bindsList += '$q->bindValue(":' + COLUMNS_NAME[i] + '", $obj->get' + ucFirst(COLUMNS_NAME[i]) + "());\n";
     }
 
     attributesList = attributesList.substr(0, attributesList.length - 1);
     sqlValues = sqlValues.substr(0, sqlValues.length - 1);
 
-    return "public static function add(" + className + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("INSERT INTO ' + tableName + ' (' + attributesList + ') VALUES (' + sqlValues + ')");\n' + bindsList + "$q->execute();\n}";;
+    return "public static function add(" + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("INSERT INTO ' + TABLE_NAME + ' (' + attributesList + ') VALUES (' + sqlValues + ')");\n' + bindsList + "$q->execute();\n}";;
 }
 
 // ===> Create the update function
@@ -117,28 +116,28 @@ function generateUpdate() {
     let attributesList = "";
     let bindsList = "";
 
-    for (let i = 0; i < columnsName.length; i++) {
-        attributesList += columnsName[i] + "=:" + columnsName[i] + ", ";
-        bindsList += '$q->bindValue(":' + columnsName[i] + '", $obj->get' + ucFirst(columnsName[i]) + "());\n";
+    for (let i = 0; i < COLUMNS_NAME.length; i++) {
+        attributesList += COLUMNS_NAME[i] + "=:" + COLUMNS_NAME[i] + ", ";
+        bindsList += '$q->bindValue(":' + COLUMNS_NAME[i] + '", $obj->get' + ucFirst(COLUMNS_NAME[i]) + "());\n";
     }
 
-    bindsList += '$q->bindValue(":' + tableId + '", $obj->get' + ucFirst(tableId) + "());\n";
+    bindsList += '$q->bindValue(":' + TABLE_ID + '", $obj->get' + ucFirst(TABLE_ID) + "());\n";
     attributesList = attributesList.substr(0, attributesList.length - 2);
 
-    return 'public static function update(' + className + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("UPDATE ' + tableName + ' SET ' + attributesList + " WHERE " + tableId + "=:" + tableId + "\");\n" + bindsList + "$q->execute();\n}";
+    return 'public static function update(' + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("UPDATE ' + TABLE_NAME + ' SET ' + attributesList + " WHERE " + TABLE_ID + "=:" + TABLE_ID + "\");\n" + bindsList + "$q->execute();\n}";
 }
 
 // ===> Create the delete function
 function generateDelete() {
-    return 'public static function delete(' + className + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$db->exec("DELETE FROM ' + tableName + ' WHERE ' + tableId + '=" . $obj->get' + ucFirst(tableId) + '());\n}';
+    return 'public static function delete(' + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$db->exec("DELETE FROM ' + CLASS_NAME + ' WHERE ' + TABLE_ID + '=" . $obj->get' + ucFirst(TABLE_ID) + '());\n}';
 }
 
 // ===> Create the findById function
 function generateFindById() {
-    return "public static function findById($id)\n{\n$db = DbConnect::getDb();\n$id = (int) $id;\n" + '$q = $db->query("SELECT * FROM ' + tableName + ' WHERE ' + tableId + '=".$id);\n' + "$results = $q->fetch(PDO::FETCH_ASSOC);\nif ($results != false) {\nreturn new " + className + " ($results);\n }else {\nreturn false;\n}\n}";
+    return "public static function findById($id)\n{\n$db = DbConnect::getDb();\n$id = (int) $id;\n" + '$q = $db->query("SELECT * FROM ' + CLASS_NAME + ' WHERE ' + TABLE_ID + '=".$id);\n' + "$results = $q->fetch(PDO::FETCH_ASSOC);\nif ($results != false) {\nreturn new " + CLASS_NAME + " ($results);\n }else {\nreturn false;\n}\n}";
 }
 
 // ===> Create the getList function
 function generateGetList() {
-    return "public static function getList()\n{\n$db = DbConnect::getDb();\n$tab = [];\n" + '$q = $db->query("SELECT * FROM ' + tableName + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$tab[] = new " + className + "($donnees);\n}\n}\nreturn $tab;\n}";
+    return "public static function getList()\n{\n$db = DbConnect::getDb();\n$tab = [];\n" + '$q = $db->query("SELECT * FROM ' + CLASS_NAME + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$tab[] = new " + CLASS_NAME + "($donnees);\n}\n}\nreturn $tab;\n}";
 }
