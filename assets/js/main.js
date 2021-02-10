@@ -2,15 +2,17 @@
 // =================================================
 // ============ MAIN
 
-// ===> Manage the generate button
+// ===> Check the errors and create the files
 get("#generate").addEventListener("click", () => {
     let error = 0;
     let list = get(".gen");
 
+    // Each empty input increment the error variable
     for (let i = 0; i < list.length; i++) {
         if (list[i].value === "") error++; 
     }
 
+    // Creation of the files
     if (error == 0) {
         get("#error").style.visibility = "hidden";
 
@@ -31,12 +33,18 @@ get("#generate").addEventListener("click", () => {
 // =================================================
 // ============ CLASS
 
-// ===> Merge together all the class functions
+/**
+ * Merge all the functions and generate the class
+ **/
+
 function generateClass() {
     return "<?php" + "\n" + 'class ' + CLASS_NAME + "\n{\n" + generateAttributes() + "\n" + generateGetterSetter() + "\n" + genererConstruct() + "\n\n}";
 }
 
-// ===> Create the attributes part
+/**
+ * Generate the attributes of the class
+ **/
+
 function generateAttributes() {
     let attributes = "";
 
@@ -47,7 +55,10 @@ function generateAttributes() {
     return attributes;
 }
 
-// ===> Create the getter/setter part
+/**
+ * Generate the getter and the setter of the class
+ **/
+
 function generateGetterSetter() {
     let getterSetter = "";
     
@@ -59,7 +70,10 @@ function generateGetterSetter() {
     return getterSetter;
 }
 
-// ===> Create the construct part
+/**
+ * Generate the constructor of the class
+ **/
+
 function genererConstruct() {
     return `public function __construct(array $options = [])
 {
@@ -85,7 +99,10 @@ public function hydrate($data)
 // =================================================
 // ============ MANAGER
 
-// ===> Merge together all the manager functions
+/**
+ * Merge all the functions and generate the manager
+ **/
+
 function generateManager() {
     let key = COLUMNS_NAME.find(element => element == TABLE_ID);
     if (key != "undefined") COLUMNS_NAME.splice(COLUMNS_NAME.indexOf(key), 1)
@@ -93,7 +110,10 @@ function generateManager() {
     return "<?php\nclass " + CLASS_NAME + "Manager\n{\n" + generateAdd() + "\n\n" + generateUpdate() + "\n\n" + generateDelete() + "\n\n" + generateFindById() + "\n\n" + generateGetList() + "\n\n}";
 }
 
-// ===> Create the add functiion
+/**
+ * Generate the add function of the manager
+ **/
+
 function generateAdd() {
     let attributesList = "";
     let sqlValues = "";
@@ -111,7 +131,10 @@ function generateAdd() {
     return "public static function add(" + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("INSERT INTO ' + TABLE_NAME + ' (' + attributesList + ') VALUES (' + sqlValues + ')");\n' + bindsList + "$q->execute();\n}";;
 }
 
-// ===> Create the update function
+/**
+ * Generate the update function of the manager
+ **/
+
 function generateUpdate() {
     let attributesList = "";
     let bindsList = "";
@@ -127,17 +150,26 @@ function generateUpdate() {
     return 'public static function update(' + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("UPDATE ' + TABLE_NAME + ' SET ' + attributesList + " WHERE " + TABLE_ID + "=:" + TABLE_ID + "\");\n" + bindsList + "$q->execute();\n}";
 }
 
-// ===> Create the delete function
+/**
+ * Generate the delete function of the manager
+ **/
+
 function generateDelete() {
     return 'public static function delete(' + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$db->exec("DELETE FROM ' + CLASS_NAME + ' WHERE ' + TABLE_ID + '=" . $obj->get' + ucFirst(TABLE_ID) + '());\n}';
 }
 
-// ===> Create the findById function
+/**
+ * Generate the findById function of the manager
+ **/
+
 function generateFindById() {
     return "public static function findById($id)\n{\n$db = DbConnect::getDb();\n$id = (int) $id;\n" + '$q = $db->query("SELECT * FROM ' + CLASS_NAME + ' WHERE ' + TABLE_ID + '=".$id);\n' + "$results = $q->fetch(PDO::FETCH_ASSOC);\nif ($results != false) {\nreturn new " + CLASS_NAME + " ($results);\n }else {\nreturn false;\n}\n}";
 }
 
-// ===> Create the getList function
+/**
+ * Generate the getList function of the manager
+ **/
+
 function generateGetList() {
     return "public static function getList()\n{\n$db = DbConnect::getDb();\n$tab = [];\n" + '$q = $db->query("SELECT * FROM ' + CLASS_NAME + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$tab[] = new " + CLASS_NAME + "($donnees);\n}\n}\nreturn $tab;\n}";
 }

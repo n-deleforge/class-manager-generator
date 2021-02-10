@@ -43,7 +43,5 @@ let names = Object.keys(_CONTENT);
 let values = Object.values(_CONTENT);
 
 for (let i = 0; i < names.length; i++) {
-    if (get("#" + names[i])) {
-        get("#" + names[i]).innerHTML = values[i];
-    }
+    if (get("#" + names[i])) get("#" + names[i]).innerHTML = values[i];
 }
