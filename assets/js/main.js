@@ -2,7 +2,10 @@
 // =================================================
 // ============ MAIN
 
-// ===> Check the errors and create the files
+/**
+ * Check the errors in the form and create the files
+ **/
+
 get("#generate").addEventListener("click", () => {
     let error = 0;
     let list = get(".gen");

@@ -37,7 +37,7 @@ const _ENGLISH = {
 // =================================================
 // ============ CORE INITIALISATION
 
-// ===> Determine the language of the application
+// Determine the language of the application
 const _CONTENT = (navigator.language == "fr" || navigator.language == "fr-FR") ? _FRENCH : _ENGLISH;
 let names = Object.keys(_CONTENT);
 let values = Object.values(_CONTENT);
