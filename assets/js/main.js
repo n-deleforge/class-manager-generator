@@ -3,6 +3,20 @@
 // ============ MAIN
 
 /**
+ * Reset all the inputs
+ **/
+
+get("#reset").addEventListener("click", () => {
+    get("#error").style.visibility = "hidden";
+    let list = get(".gen");
+
+    // Each empty input increment the error variable
+    for (let i = 0; i < list.length; i++) {
+        list[i].value = ""; 
+    }
+});
+
+/**
  * Check the errors in the form and create the files
  **/
 
@@ -17,7 +31,7 @@ get("#generate").addEventListener("click", () => {
 
     // Creation of the files
     if (error == 0) {
-        get("#error").style.visibility = "hidden";
+        get("#error").innerHTML = _CONTENT.downloading;
 
         // Fulfill variables with correct data
         TABLE_NAME = get("#tableName").value;

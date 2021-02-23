@@ -3,15 +3,16 @@
 /* ======== VARIABLES */
 
 :root {
-    --background: #262931;
-    --mainTextColor: white;
-    --borderContainer: white;
-    --footerLinkColor: lightcoral;
-    --labelTextColor: lightcoral;
+    --background: #001f3f;
+    --appColorOutside: white;
+    --appColorInside: black;
+    --borderContainer: black;
+    --footerLinkColor: lightskyblue;
+    --labelText: black;
     --borderInput: black;
-    --errorTextColor: lightcoral;
-    --buttonColor1: white;
-    --buttonColor2: lightcoral;
+    --errorTextr: #004080;
+    --buttonColor1: #004080;
+    --buttonColor2: white;
 }
 
 /* ======================================== */
@@ -22,7 +23,7 @@ html,
 body {
     margin: 0;
     font-family: sans-serif;
-    color: var(--mainTextColor);
+    color: var(--appColorInside);
     background: var(--background);
 }
 
@@ -34,15 +35,18 @@ body {
 
 header {
     display: flex;
+    align-items: center;
     justify-content: center;
     padding: 2vh;
     text-transform: uppercase;
     font-size: 2.5em;
+    color: var(--appColorOutside);
 }
 
 #footer {
     padding: 2vh;
     text-align: center;
+    color: var(--appColorOutside);
 }
 
 a {
@@ -68,35 +72,38 @@ p {
     flex-direction: column;
     flex-grow: 1;
     justify-content: center;
-    margin: 0 25vw;
-    padding: 2vh 0;
-    border-top: 2px solid var(--borderContainer);
-    border-bottom: 2px solid var(--borderContainer);
+    margin: 2vh 25vw;
+    padding: 0 2vw;
+    background: white;
 }
 
 label {
     text-transform: uppercase;
     font-size: 1.5em;
-    color: var(--labelTextColor);
+    font-weight: bold;
+    color: var(--labelText);
 }
 
 input,
 textarea {
     margin-bottom: 2vh;
     padding: 1.5vh;
-    border: 1px solid var(--borderInput);
-    border-radius: 5px;
+    border: 2px solid var(--borderContainer);
 }
 
 textarea {
     resize: vertical;
 }
 
-#generate {
+#listButtons {
+    text-align: center;
+}
+
+button {
     margin: 0 auto;
-    padding: 1.5vh;
-    max-width: 20vw;
-    min-width: 20vw;
+    padding: 1vh;
+    max-width: 15vw;
+    min-width: 15vw;
     border: 0;
     border-radius: 10px;
     text-transform: uppercase;
@@ -105,17 +112,17 @@ textarea {
     background: var(--buttonColor1);
 }
 
-#generate:hover {
-    color: var(--buttonColor1);
-    background: var(--buttonColor2);
+button:hover {
+    opacity: 0.8;
 }
 
 #error {
     visibility: hidden;
     padding-bottom: 2vh;
     text-align: center;
+    text-transform: uppercase;
     font-size: 1.5em;
-    color: var(--errorTextColor);
+    color: var(--errorText);
 }
 
 /* ======================================== */
@@ -123,8 +130,13 @@ textarea {
 /* ======== MOBILE */
 
 @media(max-width:1200px) {
+    header {
+        height: 5vh;
+    }
+
     #app {
-        margin: 0 5vw;
+        margin: 0;
+        padding: 2vh 0.5vw;
     }
 
     button:active,
@@ -141,7 +153,14 @@ textarea {
         font-size: 1.2em;
     }
 
-    #generate {
+    #listButtons {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    button {
+        margin: 1vh 0;
         max-width: 60vw;
         min-width: 60vw;
     }

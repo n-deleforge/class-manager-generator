@@ -15,6 +15,7 @@ If you download or clone the project to host it yourself, then you'll need [**Li
 
 # Changelog
 
+- 1.6 : Design improved and reset button added
 - 1.5 : CSS variables added and some changes in the JS core file (reorganized and simplier)
 - 1.4 : Core JS file added, some cleaning code in JS, comments added and a little fix about the error message
 - 1.3 : English translation added and content of the app stored in arrays to switch easily

@@ -5,7 +5,7 @@
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Manager Generator</title>
-    <link rel="stylesheet" href="assets/css/main.min.css">    
+    <link rel="stylesheet" href="assets/css/main.min.css?v=1.6">    
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 
@@ -13,7 +13,7 @@
     <div id="container">
         <header>Class Manager Generator</header>
 
-        <div id="app">
+        <form id="app">
             <label id="tableNameLabel" for="tableName"></label>
             <p id="tableNameDesc"></p>
             <input id="tableName" class="gen">
@@ -31,14 +31,18 @@
             <input id="className" class="gen">
 
             <p id="error"></p>
-            <button id="generate"></button>
-        </div>
+
+            <div id="listButtons">
+                <button id="reset" onclick="return false"></button>
+                <button id="generate" onclick="return false"></button>
+            </div>
+        </form>
 
         <div id="footer"></div>
     </div>
     
     <script src="../../libraries/littleJS.min.js"></script>
-    <script src="assets/js/core.min.js"></script>
-    <script src="assets/js/main.min.js"></script>
+    <script src="assets/js/core.min.js?v=1.6"></script>
+    <script src="assets/js/main.min.js?v=1.6"></script>
 </body>
 </html>

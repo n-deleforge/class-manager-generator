@@ -3,12 +3,14 @@
 // ============ CORE VARIABLES
 
 let TABLE_NAME; let TABLE_ID; let COLUMNS_NAME; let CLASS_NAME; 
-const _VERSION = 1.5;
+const _VERSION = 1.6;
 const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
 const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
 const _FRENCH = {
+    'reset' : "Effacer",
     'generate' : "Générer",
     'error' : "Tous les champs sont nécessaires.",
+    'downloading' : "Génération réussie.",
     'footer' : "Disponible sur " + _GITHUB + " (v " + _VERSION + ") - Hébergé sur " + _HOME,
     'tableNameLabel' : "➡ NOM DE LA TABLE",
     'tableNameDesc' : "Nom de table qui correspond au nom tel qu'il est dans votre base de données SQL.",
@@ -20,8 +22,10 @@ const _FRENCH = {
     'classNameDesc' : "Nom de la Class et du Manager que vous allez créer (une majuscule est automatiquement appliquée)."
 };
 const _ENGLISH = {
+    'reset' : "Reset",
     'generate' : "Generate",
     'error' : "All the fields have to be filled.",
+    'downloading' : "Success generation.",
     'footer' : "Available on " + _GITHUB + " (v " + _VERSION + ") - Hosted on " + _HOME,
     'tableNameLabel' : "➡ TABLE NAME",
     'tableNameDesc' : "Name of the table in your database.",
