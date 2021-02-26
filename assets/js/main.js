@@ -1,5 +1,12 @@
 // =================================================
 // =================================================
+// ============ VARIABLES
+
+const listInput = get(".gen");
+const messageToDisplay = get("#error");
+
+// =================================================
+// =================================================
 // ============ MAIN
 
 /**
@@ -7,7 +14,7 @@
  **/
 
 get("#reset").addEventListener("click", () => {
-    get("#error").style.visibility = "hidden";
+    messageToDisplay.style.visibility = "hidden";
     let list = get(".gen");
 
     // Each empty input increment the error variable
@@ -22,16 +29,16 @@ get("#reset").addEventListener("click", () => {
 
 get("#generate").addEventListener("click", () => {
     let error = 0;
-    let list = get(".gen");
 
     // Each empty input increment the error variable
-    for (let i = 0; i < list.length; i++) {
-        if (list[i].value === "") error++; 
+    for (let i = 0; i < listInput.length; i++) {
+        if (listInput[i].value === "") error++; 
     }
 
     // Creation of the files
     if (error == 0) {
-        get("#error").innerHTML = _CONTENT.downloading;
+        messageToDisplay.style.visibility = "visible";
+        messageToDisplay.innerHTML = _CONTENT.downloading;
 
         // Fulfill variables with correct data
         TABLE_NAME = get("#tableName").value;
@@ -43,7 +50,7 @@ get("#generate").addEventListener("click", () => {
         download(generateClass(), CLASS_NAME + ".Class.php");
         download(generateManager(), CLASS_NAME + "Manager.Class.php");
     }
-    else get("#error").style.visibility = "visible";
+    else messageToDisplay.style.visibility = "visible";
 });
 
 // =================================================
@@ -121,7 +128,7 @@ public function hydrate($data)
  **/
 
 function generateManager() {
-    let key = COLUMNS_NAME.find(element => element == TABLE_ID);
+    const key = COLUMNS_NAME.find(element => element == TABLE_ID);
     if (key != "undefined") COLUMNS_NAME.splice(COLUMNS_NAME.indexOf(key), 1)
 
     return "<?php\nclass " + CLASS_NAME + "Manager\n{\n" + generateAdd() + "\n\n" + generateUpdate() + "\n\n" + generateDelete() + "\n\n" + generateFindById() + "\n\n" + generateGetList() + "\n\n}";
