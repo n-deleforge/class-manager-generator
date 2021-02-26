@@ -2,7 +2,6 @@
 // =================================================
 // ============ CORE VARIABLES
 
-let TABLE_NAME; let TABLE_ID; let COLUMNS_NAME; let CLASS_NAME; 
 const _VERSION = 1.6;
 const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
 const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";

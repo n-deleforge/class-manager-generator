@@ -2,8 +2,9 @@
 // =================================================
 // ============ VARIABLES
 
-const listInput = get(".gen");
-const messageToDisplay = get("#error");
+const _LIST_INPUT = get(".gen");
+const _MESSAGE = get("#error");
+let TABLE_NAME; let TABLE_ID; let COLUMNS_NAME; let CLASS_NAME; 
 
 // =================================================
 // =================================================
@@ -14,12 +15,11 @@ const messageToDisplay = get("#error");
  **/
 
 get("#reset").addEventListener("click", () => {
-    messageToDisplay.style.visibility = "hidden";
-    let list = get(".gen");
+    _MESSAGE.style.visibility = "hidden";
 
     // Each empty input increment the error variable
-    for (let i = 0; i < list.length; i++) {
-        list[i].value = ""; 
+    for (let i = 0; i < _LIST_INPUT.length; i++) {
+        _LIST_INPUT[i].value = ""; 
     }
 });
 
@@ -31,14 +31,14 @@ get("#generate").addEventListener("click", () => {
     let error = 0;
 
     // Each empty input increment the error variable
-    for (let i = 0; i < listInput.length; i++) {
-        if (listInput[i].value === "") error++; 
+    for (let i = 0; i < _LIST_INPUT.length; i++) {
+        if (_LIST_INPUT[i].value === "") error++; 
     }
 
     // Creation of the files
     if (error == 0) {
-        messageToDisplay.style.visibility = "visible";
-        messageToDisplay.innerHTML = _CONTENT.downloading;
+        _MESSAGE.style.visibility = "visible";
+        _MESSAGE.innerHTML = _CONTENT.downloading;
 
         // Fulfill variables with correct data
         TABLE_NAME = get("#tableName").value;
@@ -50,7 +50,7 @@ get("#generate").addEventListener("click", () => {
         download(generateClass(), CLASS_NAME + ".Class.php");
         download(generateManager(), CLASS_NAME + "Manager.Class.php");
     }
-    else messageToDisplay.style.visibility = "visible";
+    else _MESSAGE.style.visibility = "visible";
 });
 
 // =================================================
@@ -187,7 +187,7 @@ function generateDelete() {
  **/
 
 function generateFindById() {
-    return "public static function findById($id)\n{\n$db = DbConnect::getDb();\n$id = (int) $id;\n" + '$q = $db->query("SELECT * FROM ' + CLASS_NAME + ' WHERE ' + TABLE_ID + '=".$id);\n' + "$results = $q->fetch(PDO::FETCH_ASSOC);\nif ($results != false) {\nreturn new " + CLASS_NAME + " ($results);\n }else {\nreturn false;\n}\n}";
+    return "public static function findById($id)\n{\n$db = DbConnect::getDb();\n$id = (int) $id;\n" + '$q = $db->query("SELECT * FROM ' + TABLE_NAME + ' WHERE ' + TABLE_ID + '=".$id);\n' + "$results = $q->fetch(PDO::FETCH_ASSOC);\nif ($results != false) {\nreturn new " + CLASS_NAME + " ($results);\n }else {\nreturn false;\n}\n}";
 }
 
 /**
@@ -195,5 +195,5 @@ function generateFindById() {
  **/
 
 function generateGetList() {
-    return "public static function getList()\n{\n$db = DbConnect::getDb();\n$tab = [];\n" + '$q = $db->query("SELECT * FROM ' + CLASS_NAME + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$tab[] = new " + CLASS_NAME + "($donnees);\n}\n}\nreturn $tab;\n}";
+    return "public static function getList()\n{\n$db = DbConnect::getDb();\n$arr = [];\n" + '$q = $db->query("SELECT * FROM ' + TABLE_NAME + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$arr[] = new " + CLASS_NAME + "($donnees);\n}\n}\nreturn $arr;\n}";
 }
