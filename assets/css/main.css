@@ -63,26 +63,12 @@ header {
     color: var(--appColorOutside);
 }
 
-/* ======================================== */
-/* ======================================== */
-/* ======== FORM */
-
-label {
-    text-transform: uppercase;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--labelText);
-}
-
-input,
-textarea {
-    margin-bottom: 2vh;
-    padding: 1.5vh;
-    border: 2px solid var(--borderContainer);
-}
-
-textarea {
-    resize: vertical;
+@media(max-width:1200px) {
+    header {
+        height: 5vh;
+        padding: 1.5vh;
+        font-size: 1.5em;
+    }
 }
 
 /* ======================================== */
@@ -115,6 +101,59 @@ button:hover {
     width: 10vw;
 }
 
+@media(max-width:1200px) {
+    #listButtons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        margin: 1vh 0;
+    }
+
+    #generate {
+        width: 80vw;
+    }
+    
+    #reset {
+        width: 50vw;
+    }
+
+    button:active,
+    button:focus {
+        outline: 0;
+    }
+}
+
+/* ======================================== */
+/* ======================================== */
+/* ======== FORM */
+
+label {
+    text-transform: uppercase;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--labelText);
+}
+
+input,
+textarea {
+    margin-bottom: 2vh;
+    padding: 1.5vh;
+    border: 2px solid var(--borderContainer);
+}
+
+textarea {
+    resize: vertical;
+}
+
+@media(max-width:1200px) {
+    label {
+        font-size: 1.2em;
+    }
+}
+
 /* ======================================== */
 /* ======================================== */
 /* ======== APP */
@@ -138,50 +177,9 @@ button:hover {
     color: var(--errorText);
 }
 
-/* ======================================== */
-/* ======================================== */
-/* ======== MOBILE */
-
 @media(max-width:1200px) {
-    header {
-        height: 5vh;
-        padding: 1.5vh;
-        font-size: 1.5em;
-    }
-
     #app {
         margin: 0;
         padding: 2vh 0.5vw;
-    }
-
-    /* FORM */
-
-    label {
-        font-size: 1.2em;
-    }
-
-    /* BUTTON */
-
-    #listButtons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    button {
-        margin: 1vh 0;
-    }
-
-    #generate {
-        width: 80vw;
-    }
-    
-    #reset {
-        width: 50vw;
-    }
-
-    button:active,
-    button:focus {
-        outline: 0;
     }
 }
