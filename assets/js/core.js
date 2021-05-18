@@ -4,13 +4,13 @@
 
 const _VERSION = 1.6;
 const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
-const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
+const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">NDDev</a>";
 const _FRENCH = {
     'reset' : "Effacer",
     'generate' : "Générer",
     'error' : "Tous les champs sont nécessaires.",
     'downloading' : "Génération réussie.",
-    'footer' : "Disponible sur " + _GITHUB + " (v " + _VERSION + ") - Hébergé sur " + _HOME,
+    'footer' : "Disponible sur " + _GITHUB + " (v " + _VERSION + ") ©  " + _HOME,
     'tableNameLabel' : "➡ NOM DE LA TABLE",
     'tableNameDesc' : "Nom de table qui correspond au nom tel qu'il est dans votre base de données SQL.",
     'tableIdLabel' : "➡ NOM DU CHAMP ID",
@@ -25,7 +25,7 @@ const _ENGLISH = {
     'generate' : "Generate",
     'error' : "All the fields have to be filled.",
     'downloading' : "Success generation.",
-    'footer' : "Available on " + _GITHUB + " (v " + _VERSION + ") - Hosted on " + _HOME,
+    'footer' : "Available on " + _GITHUB + " (v " + _VERSION + ") ©  " + _HOME,
     'tableNameLabel' : "➡ TABLE NAME",
     'tableNameDesc' : "Name of the table in your database.",
     'tableIdLabel' : "➡ ID FIELD NAME",
