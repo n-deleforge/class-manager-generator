@@ -179,7 +179,7 @@ function generateUpdate() {
  **/
 
 function generateDelete() {
-    return 'public static function delete(' + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$db->exec("DELETE FROM ' + CLASS_NAME + ' WHERE ' + TABLE_ID + '=" . $obj->get' + ucFirst(TABLE_ID) + '());\n}';
+    return 'public static function delete(' + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$db->exec("DELETE FROM ' + TABLE_NAME + ' WHERE ' + TABLE_ID + '=" . $obj->get' + ucFirst(TABLE_ID) + '());\n}';
 }
 
 /**
