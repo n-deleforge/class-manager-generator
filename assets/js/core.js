@@ -4,7 +4,7 @@
 
 const _VERSION = 1.6;
 const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
-const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">NDDev</a>";
+const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">ForgeCode</a>";
 const _FRENCH = {
     'reset' : "Effacer",
     'generate' : "Générer",
