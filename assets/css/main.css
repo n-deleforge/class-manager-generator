@@ -2,16 +2,17 @@
 /* ======== VARIABLES */
 
 :root {
-    --background: #001f3f;
-    --appColorOutside: white;
-    --appColorInside: black;
-    --borderContainer: black;
-    --footerLinkColor: lightskyblue;
-    --labelText: black;
-    --borderInput: black;
-    --errorText: #004080;
-    --buttonColor1: #004080;
-    --buttonColor2: white;
+    --background-page: #001f3f;
+    --background-app: white;
+    --text-app: black;
+    --text-link: lightskyblue;
+    --text-header: white;
+    --text-footer: white;
+    --text-error: #004080;
+    --text-label: black;
+    --border-input: black;
+    --button-color-1: #004080;
+    --button-color-2: white;
 }
 
 /* ======================================== */
@@ -21,13 +22,13 @@ html,
 body {
     margin: 0;
     font-family: sans-serif;
-    color: var(--appColorInside);
-    background: var(--background);
+    color: var(--text-app);
+    background-color: var(--background-page);
 }
 
 a {
     text-decoration: none;
-    color: var(--footerLinkColor);
+    color: var(--text-link);
 }
 
 a:hover {
@@ -38,6 +39,9 @@ p {
     margin: 0;
     padding: 1vh;
 }
+
+/* ======================================== */
+/* ======== APP */
 
 #container {
     display: flex;
@@ -52,13 +56,32 @@ header {
     padding: 2vh;
     text-transform: uppercase;
     font-size: 2.5em;
-    color: var(--appColorOutside);
+    color: var(--text-header);
 }
 
 #footer {
     padding: 2vh;
     text-align: center;
-    color: var(--appColorOutside);
+    color: var(--text-footer);
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    margin: 2vh 25vw;
+    padding: 0 2vw;
+    background-color: var(--background-app);
+}
+
+#error {
+    visibility: hidden;
+    padding-bottom: 2vh;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    color: var(--text-error);
 }
 
 @media(max-width:1200px) {
@@ -66,6 +89,11 @@ header {
         height: 5vh;
         padding: 1.5vh;
         font-size: 1.5em;
+    }
+
+    #app {
+        margin: 0;
+        padding: 2vh 0.5vw;
     }
 }
 
@@ -82,8 +110,8 @@ button {
     border: 0;
     text-transform: uppercase;
     font-size: 1.5em;
-    color: var(--buttonColor2);
-    background: var(--buttonColor1);
+    color: var(--button-color-2);
+    background-color: var(--button-color-1);
 }
 
 button:hover {
@@ -130,14 +158,14 @@ label {
     text-transform: uppercase;
     font-size: 1.5em;
     font-weight: bold;
-    color: var(--labelText);
+    color: var(--text-label);
 }
 
 input,
 textarea {
     margin-bottom: 2vh;
     padding: 1.5vh;
-    border: 2px solid var(--borderContainer);
+    border: 2px solid var(--border-input);
 }
 
 textarea {
@@ -147,34 +175,5 @@ textarea {
 @media(max-width:1200px) {
     label {
         font-size: 1.2em;
-    }
-}
-
-/* ======================================== */
-/* ======== APP */
-
-#app {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    justify-content: center;
-    margin: 2vh 25vw;
-    padding: 0 2vw;
-    background: white;
-}
-
-#error {
-    visibility: hidden;
-    padding-bottom: 2vh;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 1.5em;
-    color: var(--errorText);
-}
-
-@media(max-width:1200px) {
-    #app {
-        margin: 0;
-        padding: 2vh 0.5vw;
     }
 }

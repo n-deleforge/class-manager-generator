@@ -1,15 +1,15 @@
 // =================================================
 // ============ CORE VARIABLES
 
-const _VERSION = 1.6;
-const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
-const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">ForgeCode</a>";
-const _FRENCH = {
+const _version = 1.6;
+const _github = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/class-manager-generator\">GitHub</a>";
+const _home = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">ForgeCode</a>";
+const _french = {
     'reset' : "Effacer",
     'generate' : "Générer",
     'error' : "Tous les champs sont nécessaires.",
     'downloading' : "Génération réussie.",
-    'footer' : "Disponible sur " + _GITHUB + " (v " + _VERSION + ") ©  " + _HOME,
+    'footer' : "Disponible sur " + _github + " (v " + _version + ") ©  " + _home,
     'tableNameLabel' : "➡ NOM DE LA TABLE",
     'tableNameDesc' : "Nom de table qui correspond au nom tel qu'il est dans votre base de données SQL.",
     'tableIdLabel' : "➡ NOM DU CHAMP ID",
@@ -19,12 +19,13 @@ const _FRENCH = {
     'classNameLabel' : "➡ NOM CLASS/MANAGER",
     'classNameDesc' : "Nom de la Class et du Manager que vous allez créer (une majuscule est automatiquement appliquée)."
 };
-const _ENGLISH = {
+
+const _english = {
     'reset' : "Reset",
     'generate' : "Generate",
     'error' : "All the fields have to be filled.",
     'downloading' : "Success generation.",
-    'footer' : "Available on " + _GITHUB + " (v " + _VERSION + ") ©  " + _HOME,
+    'footer' : "Available on " + _github + " (v " + _version + ") ©  " + _home,
     'tableNameLabel' : "➡ TABLE NAME",
     'tableNameDesc' : "Name of the table in your database.",
     'tableIdLabel' : "➡ ID FIELD NAME",
@@ -39,10 +40,11 @@ const _ENGLISH = {
 // ============ CORE INITIALISATION
 
 // Determine the language of the application
-const _CONTENT = (navigator.language == "fr" || navigator.language == "fr-FR") ? _FRENCH : _ENGLISH;
-let names = Object.keys(_CONTENT);
-let values = Object.values(_CONTENT);
+const _content = (navigator.language == "fr" || navigator.language == "fr-FR") ? _french : _english;
+let names = Object.keys(_content); let values = Object.values(_content);
 
 for (let i = 0; i < names.length; i++) {
-    if (get("#" + names[i])) get("#" + names[i]).innerHTML = values[i];
+    if (get("#" + names[i])) {
+        get("#" + names[i]).innerHTML = values[i];
+    }
 }

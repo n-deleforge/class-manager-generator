@@ -1,9 +1,9 @@
 // =================================================
 // ============ VARIABLES
 
-const _LIST_INPUT = get(".gen");
-const _MESSAGE = get("#error");
-let TABLE_NAME; let TABLE_ID; let COLUMNS_NAME; let CLASS_NAME; 
+const _listInput = get(".gen");
+const _message = get("#error");
+let tableName; let tableID; let columnsName; let className; 
 
 // =================================================
 // ============ MAIN
@@ -13,11 +13,11 @@ let TABLE_NAME; let TABLE_ID; let COLUMNS_NAME; let CLASS_NAME;
  **/
 
 get("#reset").addEventListener("click", () => {
-    _MESSAGE.style.visibility = "hidden";
+    _message.style.visibility = "hidden";
 
     // Each empty input increment the error variable
-    for (let i = 0; i < _LIST_INPUT.length; i++) {
-        _LIST_INPUT[i].value = ""; 
+    for (let i = 0; i < _listInput.length; i++) {
+        _listInput[i].value = ""; 
     }
 });
 
@@ -29,26 +29,26 @@ get("#generate").addEventListener("click", () => {
     let error = 0;
 
     // Each empty input increment the error variable
-    for (let i = 0; i < _LIST_INPUT.length; i++) {
-        if (_LIST_INPUT[i].value === "") error++; 
+    for (let i = 0; i < _listInput.length; i++) {
+        if (_listInput[i].value === "") error++; 
     }
 
     // Creation of the files
     if (error == 0) {
-        _MESSAGE.style.visibility = "visible";
-        _MESSAGE.innerHTML = _CONTENT.downloading;
+        _message.style.visibility = "visible";
+        _message.innerHTML = _CONTENT.downloading;
 
         // Fulfill variables with correct data
-        TABLE_NAME = get("#tableName").value;
-        TABLE_ID = get("#tableId").value;
-        CLASS_NAME = ucFirst(get("#className").value);
-        COLUMNS_NAME = get("#columnsName").value.split(',');
+        tableName = get("#tableName").value;
+        tableID = get("#tableId").value;
+        className = ucFirst(get("#className").value);
+        columnsName = get("#columnsName").value.split(',');
 
         // Generate data and make it downloadable
-        download(generateClass(), CLASS_NAME + ".Class.php");
-        download(generateManager(), CLASS_NAME + "Manager.Class.php");
+        download(generateClass(), className + ".Class.php");
+        download(generateManager(), className + "Manager.Class.php");
     }
-    else _MESSAGE.style.visibility = "visible";
+    else _message.style.visibility = "visible";
 });
 
 // =================================================
@@ -59,7 +59,7 @@ get("#generate").addEventListener("click", () => {
  **/
 
 function generateClass() {
-    return "<?php" + "\n" + 'class ' + CLASS_NAME + "\n{\n" + generateAttributes() + "\n" + generateGetterSetter() + "\n" + genererConstruct() + "\n\n}";
+    return "<?php" + "\n" + 'class ' + className + "\n{\n" + generateAttributes() + "\n" + generateGetterSetter() + "\n" + genererConstruct() + "\n\n}";
 }
 
 /**
@@ -69,8 +69,8 @@ function generateClass() {
 function generateAttributes() {
     let attributes = "";
 
-    for (let i = 0; i < COLUMNS_NAME.length; i++) {
-        attributes += "private $_" + COLUMNS_NAME[i] + ";\n";
+    for (let i = 0; i < columnsName.length; i++) {
+        attributes += "private $_" + columnsName[i] + ";\n";
     }
 
     return attributes;
@@ -83,9 +83,9 @@ function generateAttributes() {
 function generateGetterSetter() {
     let getterSetter = "";
     
-    for (let i = 0; i < COLUMNS_NAME.length; i++) {
-        getterSetter += "public function get" + ucFirst(COLUMNS_NAME[i]) + "()\n" + "{\n" + " return $this->_" + COLUMNS_NAME[i] + ";\n}\n";
-        getterSetter += "public function set" + ucFirst(COLUMNS_NAME[i]) + "($_" + COLUMNS_NAME[i] + ")\n" + "{\n" + " return $this->_" + COLUMNS_NAME[i] + " = $_" + COLUMNS_NAME[i] + ";\n}\n";
+    for (let i = 0; i < columnsName.length; i++) {
+        getterSetter += "public function get" + ucFirst(columnsName[i]) + "()\n" + "{\n" + " return $this->_" + columnsName[i] + ";\n}\n";
+        getterSetter += "public function set" + ucFirst(columnsName[i]) + "($_" + columnsName[i] + ")\n" + "{\n" + " return $this->_" + columnsName[i] + " = $_" + columnsName[i] + ";\n}\n";
     }
 
     return getterSetter;
@@ -124,10 +124,10 @@ public function hydrate($data)
  **/
 
 function generateManager() {
-    const key = COLUMNS_NAME.find(element => element == TABLE_ID);
-    if (key != "undefined") COLUMNS_NAME.splice(COLUMNS_NAME.indexOf(key), 1)
+    const key = columnsName.find(element => element == tableID);
+    if (key != "undefined") columnsName.splice(columnsName.indexOf(key), 1)
 
-    return "<?php\nclass " + CLASS_NAME + "Manager\n{\n" + generateAdd() + "\n\n" + generateUpdate() + "\n\n" + generateDelete() + "\n\n" + generateFindById() + "\n\n" + generateGetList() + "\n\n}";
+    return "<?php\nclass " + className + "Manager\n{\n" + generateAdd() + "\n\n" + generateUpdate() + "\n\n" + generateDelete() + "\n\n" + generateFindById() + "\n\n" + generateGetList() + "\n\n}";
 }
 
 /**
@@ -139,16 +139,16 @@ function generateAdd() {
     let sqlValues = "";
     let bindsList = "";
 
-    for (let i = 0; i < COLUMNS_NAME.length; i++) {
-        attributesList += COLUMNS_NAME[i] + ",";
-        sqlValues += ":" + COLUMNS_NAME[i] + ",";
-        bindsList += '$q->bindValue(":' + COLUMNS_NAME[i] + '", $obj->get' + ucFirst(COLUMNS_NAME[i]) + "());\n";
+    for (let i = 0; i < columnsName.length; i++) {
+        attributesList += columnsName[i] + ",";
+        sqlValues += ":" + columnsName[i] + ",";
+        bindsList += '$q->bindValue(":' + columnsName[i] + '", $obj->get' + ucFirst(columnsName[i]) + "());\n";
     }
 
     attributesList = attributesList.substr(0, attributesList.length - 1);
     sqlValues = sqlValues.substr(0, sqlValues.length - 1);
 
-    return "public static function add(" + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("INSERT INTO ' + TABLE_NAME + ' (' + attributesList + ') VALUES (' + sqlValues + ')");\n' + bindsList + "$q->execute();\n}";;
+    return "public static function add(" + className + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("INSERT INTO ' + tableName + ' (' + attributesList + ') VALUES (' + sqlValues + ')");\n' + bindsList + "$q->execute();\n}";;
 }
 
 /**
@@ -159,15 +159,15 @@ function generateUpdate() {
     let attributesList = "";
     let bindsList = "";
 
-    for (let i = 0; i < COLUMNS_NAME.length; i++) {
-        attributesList += COLUMNS_NAME[i] + "=:" + COLUMNS_NAME[i] + ", ";
-        bindsList += '$q->bindValue(":' + COLUMNS_NAME[i] + '", $obj->get' + ucFirst(COLUMNS_NAME[i]) + "());\n";
+    for (let i = 0; i < columnsName.length; i++) {
+        attributesList += columnsName[i] + "=:" + columnsName[i] + ", ";
+        bindsList += '$q->bindValue(":' + columnsName[i] + '", $obj->get' + ucFirst(columnsName[i]) + "());\n";
     }
 
-    bindsList += '$q->bindValue(":' + TABLE_ID + '", $obj->get' + ucFirst(TABLE_ID) + "());\n";
+    bindsList += '$q->bindValue(":' + tableID + '", $obj->get' + ucFirst(tableID) + "());\n";
     attributesList = attributesList.substr(0, attributesList.length - 2);
 
-    return 'public static function update(' + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("UPDATE ' + TABLE_NAME + ' SET ' + attributesList + " WHERE " + TABLE_ID + "=:" + TABLE_ID + "\");\n" + bindsList + "$q->execute();\n}";
+    return 'public static function update(' + className + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$q = $db->prepare("UPDATE ' + tableName + ' SET ' + attributesList + " WHERE " + tableID + "=:" + tableID + "\");\n" + bindsList + "$q->execute();\n}";
 }
 
 /**
@@ -175,7 +175,7 @@ function generateUpdate() {
  **/
 
 function generateDelete() {
-    return 'public static function delete(' + CLASS_NAME + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$db->exec("DELETE FROM ' + TABLE_NAME + ' WHERE ' + TABLE_ID + '=" . $obj->get' + ucFirst(TABLE_ID) + '());\n}';
+    return 'public static function delete(' + className + " $obj)\n{\n$db = DbConnect::getDb();\n" + '$db->exec("DELETE FROM ' + tableName + ' WHERE ' + tableID + '=" . $obj->get' + ucFirst(tableID) + '());\n}';
 }
 
 /**
@@ -183,7 +183,7 @@ function generateDelete() {
  **/
 
 function generateFindById() {
-    return "public static function findById($id)\n{\n$db = DbConnect::getDb();\n$id = (int) $id;\n" + '$q = $db->query("SELECT * FROM ' + TABLE_NAME + ' WHERE ' + TABLE_ID + '=".$id);\n' + "$results = $q->fetch(PDO::FETCH_ASSOC);\nif ($results != false) {\nreturn new " + CLASS_NAME + " ($results);\n }else {\nreturn false;\n}\n}";
+    return "public static function findById($id)\n{\n$db = DbConnect::getDb();\n$id = (int) $id;\n" + '$q = $db->query("SELECT * FROM ' + tableName + ' WHERE ' + tableID + '=".$id);\n' + "$results = $q->fetch(PDO::FETCH_ASSOC);\nif ($results != false) {\nreturn new " + className + " ($results);\n }else {\nreturn false;\n}\n}";
 }
 
 /**
@@ -191,5 +191,5 @@ function generateFindById() {
  **/
 
 function generateGetList() {
-    return "public static function getList()\n{\n$db = DbConnect::getDb();\n$arr = [];\n" + '$q = $db->query("SELECT * FROM ' + TABLE_NAME + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$arr[] = new " + CLASS_NAME + "($donnees);\n}\n}\nreturn $arr;\n}";
+    return "public static function getList()\n{\n$db = DbConnect::getDb();\n$arr = [];\n" + '$q = $db->query("SELECT * FROM ' + tableName + '");\n' + "while ($donnees = $q->fetch(PDO::FETCH_ASSOC)) {\nif ($donnees != false) {\n$arr[] = new " + className + "($donnees);\n}\n}\nreturn $arr;\n}";
 }
