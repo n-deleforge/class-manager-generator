@@ -36,7 +36,7 @@ get("#generate").addEventListener("click", () => {
     // Creation of the files
     if (error == 0) {
         _message.style.visibility = "visible";
-        _message.innerHTML = _CONTENT.downloading;
+        _message.innerHTML = _content.downloading;
 
         // Fulfill variables with correct data
         tableName = get("#tableName").value;
